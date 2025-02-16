@@ -1,0 +1,12 @@
+test subject 4
+sender@mail.com
+reciver1@mail.com, reciver2@mail.com
+14/12/3000
+this is a body test 4
+
+this is the pet [pet name]
+[pet name] is the pet 
+pet [pet name] is the pet
+[pet name][pet name][pet name]
+
+[pet name]
