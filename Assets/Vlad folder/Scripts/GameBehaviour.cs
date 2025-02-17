@@ -7,6 +7,8 @@ using UnityEngine;
 public class GameBehaviour : MonoBehaviour
 {
     public static GameBehaviour Instance;
+
+    private static Dictionary<string, float> globalGameValues = new Dictionary<string, float>();
     private void Awake()
     {
         Instance = this;
@@ -15,6 +17,24 @@ public class GameBehaviour : MonoBehaviour
             randomValuesDictionary.Add(pair.key, pair.possibleValues[Random.Range(0, pair.possibleValues.Length)]);
         }
     }
+
+    public static float GetGlobalValue(string key)
+    {
+        if(globalGameValues.ContainsKey(key))
+            return globalGameValues[key];
+        return 0;
+    }
+
+    public static void SetGlobalValue(string key, float value)
+    {
+        globalGameValues[key] = value;
+    }
+
+    public static void AddToGlobalValue(string key, float value)
+    {
+        globalGameValues[key] = GetGlobalValue(key) + value;
+    }
+
 
     [System.Serializable]
     public class RandomValues
@@ -25,13 +45,14 @@ public class GameBehaviour : MonoBehaviour
 
     public float remaingTime;
     public TMP_Text countdownDisplyText;
+    public string laserPassword;
     public List<RandomValues> randomValues;
     private Dictionary<string, string> randomValuesDictionary = new Dictionary<string, string>();
-
 
     // Start is called before the first frame update
     void Start()
     {
+        laserPassword = ReplaceKeyWorld(laserPassword).ToString();
     }
 
     public string GetKeyValue(string key)
@@ -65,7 +86,7 @@ public class GameBehaviour : MonoBehaviour
             }
         }
         if(last < text.Length - 1)
-            sb.Append(text.Substring(last, text.Length - 1 - last));
+            sb.Append(text.Substring(last, text.Length - last));
 
         return sb;
     }
