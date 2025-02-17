@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 public class Email
 {
     public static Email EmptyEmail => new Email();
-    public string title;
-    public string sender;
+    public string title = "";
+    public string sender = "";
     public string[] recivers = new string[0];
     public DateTime? date = null;
-    public string body;
+    public string body = "";
 
     private Email() { }
     public Email(string text)

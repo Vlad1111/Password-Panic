@@ -5,7 +5,7 @@ Shader "Unlit/CRT_Unlit"
         _MainTex ("Texture", 2D) = "white" {}
         _ScanLineAlpha ("Scan Line Alpha", Range(0, 1)) = 0.5
         _ScanSpeed ("Scan Speed", Range(0, 1)) = 0.5
-        _ScanLineSize ("Scan Line Size", Range(0, 1)) = 0.1
+        _ScanLineSize ("Scan Line Size", Range(0, 2)) = 0.1
         _CutoutThreshold ("Cutout Threshold", Range(0, 1)) = 0.25
     }
     SubShader

@@ -95,6 +95,9 @@ public class EmailBehaviour : MonoBehaviour
         emailDetails.text = "from: " + email.sender + "\n" +
                     "cc: " + recivers + "\n" +
                     (email.date == null ? "" : "send: " + email.date.Value.ToString("dd.MM.yyy"));
-        emailBody.text = email.body;
+        var body = email.body;
+        if (searchBar != null && searchBar.text != "")
+            body = body.Replace(searchBar.text, "<u>" + searchBar.text + "</u>");
+        emailBody.text = body;
     }
 }
