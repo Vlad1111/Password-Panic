@@ -83,15 +83,15 @@ public class GameBehaviour : MonoBehaviour
         if(parts.Length > 1)
         {
             foreach (var part in parts)
-                rez += ParseNumber(part);
+                rez += ParseNumber(part.Trim());
             return rez;
         }
         parts = ecuation.Split('-');
         if (parts.Length > 1)
         {
-            rez = ParseNumber(parts[0]);
+            rez = ParseNumber(parts[0].Trim());
             for(int i=1; i < parts.Length; i++)
-                rez -= ParseNumber(parts[i]);
+                rez -= ParseNumber(parts[i].Trim());
             return rez;
         }
         return ParseNumber(ecuation);
@@ -102,9 +102,11 @@ public class GameBehaviour : MonoBehaviour
         if(key[0] == 'd' && key[1] == ':')
         {
             var parts = key.Substring(2).Split(',');
-            //foreach (var part in parts)
-            //    Debug.Log("Part " + part);
+            foreach (var part in parts)
+                Debug.Log("Part " + part);
             var day = ComputeEcuation(parts[0]);
+            if (parts.Length < 2)
+                return day.ToString();
             var month = ComputeEcuation(parts[1]) - 1;
             var year = ComputeEcuation(parts[2]);
             for(int tr = 0; tr < 100 && (month < 0 || month > 11 || day < 1 || day > daysInMonths[month]); tr++)
