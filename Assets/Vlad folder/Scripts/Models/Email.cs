@@ -21,7 +21,7 @@ public class Email
         title = line[0];
         sender = line[1];
         recivers = line[2].Split(',').Select(x => x.Trim()).ToArray();
-        date = DateTime.Parse(line[3].Trim());
+        date = DateTime.Parse(GameBehaviour.Instance.ReplaceKeyWorld(line[3].Trim()).ToString());
         StringBuilder sb = new StringBuilder();
         for (int i = 4; i < line.Length; i++)
         {

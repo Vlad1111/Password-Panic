@@ -1,0 +1,8 @@
+test
+Hippyh00py@burnpost.com
+whatever44@burnpost.com
+[d:day-2,02,1000]
+test
+date  [d:day-2,02,2025]
+date  [d:day-2,02,2025,dmy]
+date  [d:day-2,02,2025,mn]

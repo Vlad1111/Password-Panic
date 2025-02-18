@@ -179,13 +179,23 @@ public class LaserWindowBehaviour : MonoBehaviour
 {
     public Transform laserWindowParent;
 
+    [Space(20)]
     public Transform enterPasswordParent;
     public TMP_InputField enterPasswordField;
 
+    [Space(20)]
     public Transform changePasswordParent;
     public TMP_InputField newPasswordField;
     public Transform newPasswordErrorParent;
     public Transform newPasswordErrorItem;
+
+    [Space(20)]
+    public Transform laserControllParent;
+    public Image laserChargeImage;
+    public Sprite[] laserChargeSprites;
+    public TMP_Text errorLaserText;
+    private float laserCarge = 0;
+    private float laserChargeDirection = 0;
 
     public PasswordRuleCheck[] passwordChecks = new PasswordRuleCheck[]
     {
@@ -194,12 +204,12 @@ public class LaserWindowBehaviour : MonoBehaviour
         {
             text = "The massowrd must contain a Upper case letter"
         },
-        new PasswordRuleCheck_ContainsWords(new string[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"         }, false)
+        new PasswordRuleCheck_ContainsWords(new string[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }, false)
         {
             text = "The password needs to contain a month of the year"
         },
         new PasswordRuleCheck_CheckDigitsSum(10, 1),
-        new PasswordRuleCheck_ContainsWords(new string[] { "Apple", "Mango", "Kiwi", "Pinapple", "Tomato", "Orange" }, true),
+        new PasswordRuleCheck_ContainsWords(new string[] { "Apple", "Mango", "Kiwi", "Pineapple", "Tomato", "Orange" }, true),
         new PasswordRuleCheck_ContainsWords(new string[] { "[pet name]" }, true)
         {
             text = "The password must contain the name of the pet"
@@ -236,6 +246,7 @@ public class LaserWindowBehaviour : MonoBehaviour
     {
         enterPasswordParent.gameObject.SetActive(false);
         changePasswordParent.gameObject.SetActive(false);
+        laserControllParent.gameObject.SetActive(false);
     }
     public void Open()
     {
@@ -253,6 +264,16 @@ public class LaserWindowBehaviour : MonoBehaviour
         {
             changePasswordParent.gameObject.SetActive(true);
             CheckNewPassword();
+        }
+        else
+        {
+            var isLaserCharged = GameBehaviour.GetGlobalValue(GameVariableKeys.PasswordReseted.ToString()) > 0.5f;
+            if (isLaserCharged)
+            {
+                laserCarge = laserChargeSprites.Length - 0.5f;
+            }
+            else laserCarge = 0;
+            laserControllParent.gameObject.SetActive(true);
         }
     }
 
@@ -318,7 +339,58 @@ public class LaserWindowBehaviour : MonoBehaviour
         CheckNewPassword();
         if(lastRuledPassed == passwordChecks.Length)
         {
-            Debug.Log("Password set");
+            HideAll();
+            laserControllParent.gameObject.SetActive(true);
+            GameBehaviour.SetGlobalValue(GameVariableKeys.PasswordReseted.ToString(), 1);
+        }
+    }
+
+    public void ChargeLaser()
+    {
+        laserChargeDirection = 1;
+    }
+
+    public void ArmLaser()
+    {
+        if(GameBehaviour.GetGlobalValue(GameVariableKeys.LaserCharged.ToString()) > 0.5)
+        {
+            errorLaserText.text = "The Laser is ready to fire";
+        }
+        else
+        {
+            errorLaserText.text = "Battery low. Please recharge";
+        }
+    }
+
+    private void Update()
+    {
+        int laserStage = (int)laserCarge;
+        if(laserStage != laserChargeSprites.Length - 1)
+        {
+            int stage2 = laserChargeDirection < 0 ? -laserStage % 2 : ((int)(Time.time * 4)) % 2;
+            laserChargeImage.sprite = laserChargeSprites[laserStage + stage2];
+
+            laserCarge += laserChargeDirection * Time.deltaTime;
+            if(laserCarge < 0)
+            {
+                laserCarge = 0;
+                laserChargeDirection = 0;
+            }
+        }
+        else
+        {
+            if (GameBehaviour.GetGlobalValue(GameVariableKeys.LaserCanBeCharged.ToString()) < 0.5)
+            {
+                errorLaserText.text = "An error ocured while charging the laser\n" +
+                                        "New power cells needs reconected in the lower right part of this desk\n" +
+                                        "The safe is now usable. The key to the password is 5";
+                laserChargeDirection = -6;
+                laserCarge -= 1;
+            }
+            else
+            {
+                GameBehaviour.SetGlobalValue(GameVariableKeys.LaserCharged.ToString(), 1);
+            }
         }
     }
 }

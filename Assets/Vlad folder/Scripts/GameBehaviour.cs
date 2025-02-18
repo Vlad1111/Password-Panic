@@ -55,8 +55,98 @@ public class GameBehaviour : MonoBehaviour
         laserPassword = ReplaceKeyWorld(laserPassword).ToString();
     }
 
+    private int[] daysInMonths = new[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    private string[] monthsOfTheYear = new[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+
+    private int ParseNumber(string nr)
+    {
+        nr = GetKeyValue(nr);
+
+        int sign = 1;
+        if(nr[0] == '-')
+        {
+            sign = -1;
+            nr = nr.Substring(1);
+        }
+        int x = 0;
+        for (int i = 0; i < nr.Length; i++)
+            if (nr[i] >= '0' && nr[i] <= '9')
+                x = x * 10 + nr[i] - '0';
+        //Debug.Log("Number: " + nr + " = " + x);
+        return x * sign;
+    }
+
+    private int ComputeEcuation(string ecuation)
+    {
+        var rez = 0;
+        var parts = ecuation.Split('+');
+        if(parts.Length > 1)
+        {
+            foreach (var part in parts)
+                rez += ParseNumber(part);
+            return rez;
+        }
+        parts = ecuation.Split('-');
+        if (parts.Length > 1)
+        {
+            rez = ParseNumber(parts[0]);
+            for(int i=1; i < parts.Length; i++)
+                rez -= ParseNumber(parts[i]);
+            return rez;
+        }
+        return ParseNumber(ecuation);
+    }
+
     public string GetKeyValue(string key)
     {
+        if(key[0] == 'd' && key[1] == ':')
+        {
+            var parts = key.Substring(2).Split(',');
+            //foreach (var part in parts)
+            //    Debug.Log("Part " + part);
+            var day = ComputeEcuation(parts[0]);
+            var month = ComputeEcuation(parts[1]) - 1;
+            var year = ComputeEcuation(parts[2]);
+            for(int tr = 0; tr < 100 && (month < 0 || month > 11 || day < 1 || day > daysInMonths[month]); tr++)
+            {
+                if(month < 0)
+                {
+                    month = 12 + month;
+                    year--;
+                }
+                if(month > 11)
+                {
+                    month -= 12;
+                    year++;
+                }
+                if (day < 1)
+                {
+                    month--;
+                    if (month < 0)
+                    {
+                        month = 12 + month;
+                        year--;
+                    }
+                    day = daysInMonths[month] + day;
+                }
+                if(day > daysInMonths[month])
+                {
+                    day = day - daysInMonths[month];
+                    month++;
+                }
+            }
+            if(parts.Length > 3)
+            {
+                List<string> values = new List<string>();
+                if(parts[3].Contains('d')) values.Add(day.ToString());
+                if(parts[3].Contains('m') && parts[3].Contains('n')) values.Add((month + 1).ToString());
+                else if(parts[3].Contains('m')) values.Add(monthsOfTheYear[month]);
+                if(parts[3].Contains('y'))values.Add(year.ToString());
+
+                return string.Join(" ", values.ToArray());
+            }
+            return day + "." + (month + 1) + "." + year;
+        }
         if (randomValuesDictionary.ContainsKey(key))
         {
             return randomValuesDictionary[key];
