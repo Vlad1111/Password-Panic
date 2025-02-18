@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 public enum GameVariableKeys
 {
+    None = -1,
     FoundPassword = 0,
     PasswordReseted = 1,
     LaserCanBeCharged = 2,

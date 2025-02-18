@@ -26,12 +26,17 @@ public class EmailBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine("LoadAllEmails");
+
+        searchBar.onSubmit.AddListener((x) => { Search(); });
+        searchBar.SetTextWithoutNotify("");
+    }
+
+    public void LoadAllEmails()
+    {
         var allEmails = Resources.LoadAll<TextAsset>("Emails");
         emails = allEmails.Select(x => new Email(x.ToString())).ToList();
 
-        searchBar.onSubmit.AddListener((x) => { Search(); });
-
-        searchBar.SetTextWithoutNotify("");
         ShowEmail(Email.EmptyEmail);
         Search();
     }

@@ -1124,7 +1124,7 @@ RectTransform:
   m_GameObject: {fileID: 2660573769582551189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 23}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.33, y: 1.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6505967652007915812}
@@ -2026,7 +2026,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1370225135290866897
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2060,6 +2060,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emailBehaviour: {fileID: 0}
+  scale: 0
 --- !u!114 &8053940796991965845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9103,7 +9104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.2830189, b: 0.014154305, a: 1}
+  m_Color: {r: 0, g: 0.2830189, b: 0.014154305, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
