@@ -976,7 +976,7 @@ PrefabInstance:
     - target: {fileID: 8053940796991965845, guid: bf5513f99cd73984f80bbf625ad4db40,
         type: 3}
       propertyPath: nrEmailPerSearch
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8053940796991965845, guid: bf5513f99cd73984f80bbf625ad4db40,
         type: 3}
