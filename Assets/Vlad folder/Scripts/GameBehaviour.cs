@@ -6,6 +6,15 @@ using UnityEngine;
 
 public class GameBehaviour : MonoBehaviour
 {
+    [System.Serializable]
+    public class RandomValues
+    {
+        public string key;
+        public bool isUsedInPassword;
+        public string chainValue;
+        public string[] possibleValues;
+    }
+
     public static GameBehaviour Instance;
 
     private static Dictionary<string, float> globalGameValues = new Dictionary<string, float>();
@@ -16,6 +25,31 @@ public class GameBehaviour : MonoBehaviour
         {
             randomValuesDictionary.Add(pair.key, pair.possibleValues[Random.Range(0, pair.possibleValues.Length)]);
         }
+        int[] parts = new int[4];
+        for (int i = 0; i < parts.Length; i++)
+        {
+            for (int _ = 0; _ < 100; _++)
+            {
+                parts[i] = Random.Range(0, randomValues.Count);
+                if (!randomValues[parts[i]].isUsedInPassword) continue;
+                var isOk = true;
+                for(int j=0;j<i;j++)
+                    if(parts[i] == parts[j])
+                    {
+                        isOk = false;
+                        break;
+                    }
+                if (isOk) break;
+            }
+        }
+        randomValuesDictionary.Add("chain1", randomValues[parts[0]].chainValue);
+        randomValuesDictionary.Add("chain2", randomValues[parts[1]].chainValue);
+        randomValuesDictionary.Add("chain3", randomValues[parts[2]].chainValue);
+        randomValuesDictionary.Add("chain4", randomValues[parts[3]].chainValue);
+        laserPassword = randomValuesDictionary[randomValues[parts[0]].key] +
+                        randomValuesDictionary[randomValues[parts[1]].key] +
+                        randomValuesDictionary[randomValues[parts[2]].key] +
+                        randomValuesDictionary[randomValues[parts[3]].key];
     }
 
     public static float GetGlobalValue(string key)
@@ -35,14 +69,6 @@ public class GameBehaviour : MonoBehaviour
         globalGameValues[key] = GetGlobalValue(key) + value;
     }
 
-
-    [System.Serializable]
-    public class RandomValues
-    {
-        public string key;
-        public string[] possibleValues;
-    }
-
     public float remaingTime;
     public TMP_Text countdownDisplyText;
     public string laserPassword;
@@ -52,7 +78,7 @@ public class GameBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        laserPassword = ReplaceKeyWorld(laserPassword).ToString();
+        //laserPassword = ReplaceKeyWorld(laserPassword).ToString();
     }
 
     private int[] daysInMonths = new[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
@@ -101,10 +127,10 @@ public class GameBehaviour : MonoBehaviour
     {
         if(key[0] == 'd' && key[1] == ':')
         {
+            //Debug.Log("Date: " + key);
             var parts = key.Substring(2).Split(',');
-            foreach (var part in parts)
-                Debug.Log("Part " + part);
             var day = ComputeEcuation(parts[0]);
+            //Debug.Log("first part: " + GameBehaviour.Instance.GetKeyValue(parts[0]));
             if (parts.Length < 2)
                 return day.ToString();
             var month = ComputeEcuation(parts[1]) - 1;
@@ -147,6 +173,7 @@ public class GameBehaviour : MonoBehaviour
 
                 return string.Join(" ", values.ToArray());
             }
+            //Debug.Log("Date result: " + day + "." + (month + 1) + "." + year);
             return day + "." + (month + 1) + "." + year;
         }
         if (randomValuesDictionary.ContainsKey(key))

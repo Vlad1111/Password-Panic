@@ -29,7 +29,13 @@ public class Email
         //Debug.Log("new date: " + newDate);
         DateTime dateValue;
         if (!DateTime.TryParseExact(newDate, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateValue))
-            DateTime.TryParseExact(newDate, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateValue);
+            if(!DateTime.TryParseExact(newDate, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateValue))
+                if (!DateTime.TryParseExact(newDate, "d.m.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateValue))
+                    if (!DateTime.TryParseExact(newDate, "dd.m.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateValue))
+                        if (!DateTime.TryParseExact(newDate, "d.mm.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateValue))
+                        {
+
+                    }
         date = dateValue;
 
         StringBuilder sb = new StringBuilder();

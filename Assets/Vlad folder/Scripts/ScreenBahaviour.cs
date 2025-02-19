@@ -11,7 +11,8 @@ public class CameraPositionCondition
         OpenDialogue,
         EnableElement,
         DisbleElement,
-        MoveTo
+        MoveTo,
+        SetKeyTo
     }
     public GameVariableKeys key;
     public Vector2 interval;
@@ -87,7 +88,7 @@ public class ScreenBahaviour : MonoBehaviour
                     {
                         var val = GameBehaviour.GetGlobalValue(cond.key.ToString());
                         happen = cond.interval.x < val && val < cond.interval.y;
-                        Debug.Log("key " + cond.key.ToString() + " " + val + " " + cond.interval + " " + happen);
+                        //Debug.Log("key " + cond.key.ToString() + " " + val + " " + cond.interval + " " + happen);
                     }
                     if(happen)
                     {
@@ -105,6 +106,9 @@ public class ScreenBahaviour : MonoBehaviour
                                 else StartCoroutine(DelayAction(cond.auxFloat, cond.element, true));
                                 break;
                             case CameraPositionCondition.CameraConditionEvents.MoveTo:
+                                break;
+                            case CameraPositionCondition.CameraConditionEvents.SetKeyTo:
+                                GameBehaviour.SetGlobalValue(cond.auxString, cond.auxFloat);
                                 break;
                         }
                         //break;

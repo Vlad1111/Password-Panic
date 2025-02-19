@@ -67,7 +67,7 @@ public class EmailBehaviour : MonoBehaviour
     public void Search()
     {
         var searchedEmailes = SearchEmailListFor(searchBar.text);
-        searchedEmailes.Sort((x, y) => x.date.Value.CompareTo(y.date.Value));
+        searchedEmailes.Sort((x, y) => y.date.Value.CompareTo(x.date.Value));
 
         foreach (Transform child in emailsListParent)
             Destroy(child.gameObject);

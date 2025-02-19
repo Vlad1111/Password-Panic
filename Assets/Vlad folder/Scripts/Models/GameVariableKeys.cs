@@ -13,5 +13,7 @@ public enum GameVariableKeys
     WireNeedRepering = 3,
     WireRepapred = 4,
     LaserCharged = 5,
-    LaserArmed = 6,
+    KeySnapped = 6,
+    SpareKeyFound = 7,
+    LaserArmed = 8,
 }
