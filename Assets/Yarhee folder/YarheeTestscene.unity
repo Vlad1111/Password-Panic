@@ -808,6 +808,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: computer
       objectReference: {fileID: 0}
+    - target: {fileID: 3269093534127911503, guid: bf5513f99cd73984f80bbf625ad4db40,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3469301512385123306, guid: bf5513f99cd73984f80bbf625ad4db40,
         type: 3}
       propertyPath: m_AnchorMax.y
