@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class CameraPositionCondition
@@ -17,6 +18,7 @@ public class CameraPositionCondition
     public string auxString;
     public float auxFloat;
     public Transform element;
+    public UnityEvent eventOntrue;
     public CameraConditionEvents eventType;
 }
 
@@ -89,6 +91,7 @@ public class ScreenBahaviour : MonoBehaviour
                     }
                     if(happen)
                     {
+                        cond.eventOntrue.Invoke();
                         switch(cond.eventType)
                         {
                             case CameraPositionCondition.CameraConditionEvents.DisbleElement:

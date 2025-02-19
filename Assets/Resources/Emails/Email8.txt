@@ -9,4 +9,4 @@ Look what [pet name] did!
 
 (ERROR: Video medium is not supported on this hardware.)
 
-Isn’t that adorable?!
+Isn't that adorable?!
