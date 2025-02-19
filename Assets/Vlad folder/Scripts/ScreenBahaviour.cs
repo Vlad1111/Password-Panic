@@ -84,7 +84,8 @@ public class ScreenBahaviour : MonoBehaviour
                     if(cond.key != GameVariableKeys.None)
                     {
                         var val = GameBehaviour.GetGlobalValue(cond.key.ToString());
-                        happen = cond.interval.x > val && val < cond.interval.y;
+                        happen = cond.interval.x < val && val < cond.interval.y;
+                        Debug.Log("key " + cond.key.ToString() + " " + val + " " + cond.interval + " " + happen);
                     }
                     if(happen)
                     {
@@ -103,7 +104,7 @@ public class ScreenBahaviour : MonoBehaviour
                             case CameraPositionCondition.CameraConditionEvents.MoveTo:
                                 break;
                         }
-                        break;
+                        //break;
                     }
                 }
                 curentCameraPosition = location;

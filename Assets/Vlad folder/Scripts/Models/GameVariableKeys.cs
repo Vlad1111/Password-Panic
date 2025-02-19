@@ -10,6 +10,8 @@ public enum GameVariableKeys
     FoundPassword = 0,
     PasswordReseted = 1,
     LaserCanBeCharged = 2,
-    LaserCharged = 3,
-    LaserArmed = 3,
+    WireNeedRepering = 3,
+    WireRepapred = 4,
+    LaserCharged = 5,
+    LaserArmed = 6,
 }

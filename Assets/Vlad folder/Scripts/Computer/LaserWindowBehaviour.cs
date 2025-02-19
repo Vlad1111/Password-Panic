@@ -382,14 +382,16 @@ public class LaserWindowBehaviour : MonoBehaviour
             if (GameBehaviour.GetGlobalValue(GameVariableKeys.LaserCanBeCharged.ToString()) < 0.5)
             {
                 errorLaserText.text = "An error ocured while charging the laser\n" +
-                                        "New power cells needs reconected in the lower right part of this desk\n" +
-                                        "The safe is now usable. The key to the password is 5";
+                                        "The wire pannel is now opened\n" +
+                                        "Please connect the wires back together";
                 laserChargeDirection = -6;
                 laserCarge -= 1;
+                GameBehaviour.SetGlobalValue(GameVariableKeys.WireNeedRepering.ToString(), 1);
             }
             else
             {
                 GameBehaviour.SetGlobalValue(GameVariableKeys.LaserCharged.ToString(), 1);
+                errorLaserText.text = "Laser fully charged";
             }
         }
     }
