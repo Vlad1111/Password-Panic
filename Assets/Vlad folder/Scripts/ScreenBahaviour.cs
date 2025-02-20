@@ -12,7 +12,8 @@ public class CameraPositionCondition
         EnableElement,
         DisbleElement,
         MoveTo,
-        SetKeyTo
+        SetKeyTo,
+        ShowDialogueLine,
     }
     public GameVariableKeys key;
     public Vector2 interval;
@@ -109,6 +110,9 @@ public class ScreenBahaviour : MonoBehaviour
                                 break;
                             case CameraPositionCondition.CameraConditionEvents.SetKeyTo:
                                 GameBehaviour.SetGlobalValue(cond.auxString, cond.auxFloat);
+                                break;
+                            case CameraPositionCondition.CameraConditionEvents.ShowDialogueLine:
+                                DialogueBehaviour.Instance.ShowLine(cond.auxString);
                                 break;
                         }
                         //break;

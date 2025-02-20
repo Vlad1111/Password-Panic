@@ -46,10 +46,10 @@ public class GameBehaviour : MonoBehaviour
         randomValuesDictionary.Add("chain2", randomValues[parts[1]].chainValue);
         randomValuesDictionary.Add("chain3", randomValues[parts[2]].chainValue);
         randomValuesDictionary.Add("chain4", randomValues[parts[3]].chainValue);
-        laserPassword = randomValuesDictionary[randomValues[parts[0]].key] +
-                        randomValuesDictionary[randomValues[parts[1]].key] +
-                        randomValuesDictionary[randomValues[parts[2]].key] +
-                        randomValuesDictionary[randomValues[parts[3]].key];
+        //laserPassword = randomValuesDictionary[randomValues[parts[0]].key] +
+        //                randomValuesDictionary[randomValues[parts[1]].key] +
+        //                randomValuesDictionary[randomValues[parts[2]].key] +
+        //                randomValuesDictionary[randomValues[parts[3]].key];
     }
 
     public static float GetGlobalValue(string key)
@@ -75,10 +75,13 @@ public class GameBehaviour : MonoBehaviour
     public List<RandomValues> randomValues;
     private Dictionary<string, string> randomValuesDictionary = new Dictionary<string, string>();
 
+    private bool isDialogueOn = false;
+
     // Start is called before the first frame update
     void Start()
     {
         //laserPassword = ReplaceKeyWorld(laserPassword).ToString();
+        DialogueBehaviour.Instance.ShowLine("Let's start this laser");
     }
 
     private int[] daysInMonths = new[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
@@ -210,15 +213,23 @@ public class GameBehaviour : MonoBehaviour
         return sb;
     }
 
+    public void DialogueChengedState(bool newActive)
+    {
+        isDialogueOn = newActive;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        countdownDisplyText.text = ((int)(remaingTime / 60)) + ":";
-        int seconds = ((int)remaingTime) % 60;
-        if (seconds < 10)
-            countdownDisplyText.text += "0" + seconds;
-        else
-            countdownDisplyText.text += seconds;
-        remaingTime -= Time.deltaTime;
+        if(!isDialogueOn)
+        {
+            countdownDisplyText.text = ((int)(remaingTime / 60)) + ":";
+            int seconds = ((int)remaingTime) % 60;
+            if (seconds < 10)
+                countdownDisplyText.text += "0" + seconds;
+            else
+                countdownDisplyText.text += seconds;
+            remaingTime -= Time.deltaTime;
+        }
     }
 }
