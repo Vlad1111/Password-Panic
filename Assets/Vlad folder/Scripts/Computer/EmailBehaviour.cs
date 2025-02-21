@@ -43,12 +43,14 @@ public class EmailBehaviour : MonoBehaviour
 
     public void Close()
     {
-        emailWindowParent.gameObject.SetActive(false);  
+        emailWindowParent.gameObject.SetActive(false);
+        SoundManager.Instance.PlayClip("Click");
     }
 
     public void Open()
     {
         emailWindowParent.gameObject.SetActive(true);
+        SoundManager.Instance.PlayClip("Click");
     }
 
     private List<Email> SearchEmailListFor(string world)

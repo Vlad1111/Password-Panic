@@ -150,6 +150,7 @@ public class WireGameBehaviour : MonoBehaviour
         foreach(Transform child in wireParent)
             Destroy(child.gameObject);
         pressedFire = false;
+        SoundManager.Instance.StopClip("Electricity");
     }
 
     private void PlaceNextWire(RaycastHit hit)
@@ -174,6 +175,7 @@ public class WireGameBehaviour : MonoBehaviour
         GameBehaviour.SetGlobalValue(GameVariableKeys.WireRepapred.ToString(), 1);
         GameBehaviour.SetGlobalValue(GameVariableKeys.LaserCanBeCharged.ToString(), 1);
         ScreenBahaviour.Instance.SetCameraLocation("Desk");
+        SoundManager.Instance.StopClip("Electricity");
     }
 
     private void Update()
@@ -189,10 +191,14 @@ public class WireGameBehaviour : MonoBehaviour
                 debugItem.position = hit.point;
                 if(hit.collider.name == "WireStart")
                 {
-                    var locaPos = wireParent.InverseTransformPoint(hit.point);
-                    lastWirePosition = locaPos;
-                    pressedFire = true;
-                    lastWireItem = null;
+                    if(!pressedFire)
+                    {
+                        var locaPos = wireParent.InverseTransformPoint(hit.point);
+                        lastWirePosition = locaPos;
+                        pressedFire = true;
+                        lastWireItem = null;
+                        SoundManager.Instance.PlayClip("Electricity");
+                    }
                 }
                 else if(hit.collider.name == "Board")
                 {

@@ -26,12 +26,18 @@ public class SafeBehaviour : MonoBehaviour
     public void StartCrackingSafe()
     {
         gameObject.SetActive(true);
+        if (GameBehaviour.GetGlobalValue("dialogue_start_cracking_safe") < 0.5f)
+        {
+            GameBehaviour.SetGlobalValue("dialogue_start_cracking_safe", 1);
+            DialogueBehaviour.Instance.ShowLine("Ok. So I have to just break a safe. No worry at all!");
+        }
     }
 
     private int currentCodePart = 0;
     public void MoveToDirection(int direction)
     {
-        if(code[currentCodePart] == direction)
+        SoundManager.Instance.PlayClip("Crank");
+        if (code[currentCodePart] == direction)
         {
             correctIndicator.gameObject.SetActive(true);
             incorectIndicator.gameObject.SetActive(false);
@@ -41,7 +47,12 @@ public class SafeBehaviour : MonoBehaviour
             {
                 GameBehaviour.SetGlobalValue(GameVariableKeys.SpareKeyFound.ToString(), 1);
                 ScreenBahaviour.Instance.SetCameraLocation("Desk");
-                gameObject.SetActive(false);
+                gameObject.SetActive(false); 
+                if (GameBehaviour.GetGlobalValue("dialogue_safe_cracked") < 0.5f)
+                {
+                    GameBehaviour.SetGlobalValue("dialogue_safe_cracked", 1);
+                    DialogueBehaviour.Instance.ShowDialogueFromFile("safe opened");
+                }
             }
         }
         else

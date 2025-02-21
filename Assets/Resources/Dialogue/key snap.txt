@@ -1,0 +1,12 @@
+(frame key_insert)
+Ok, just insert the safety key
+And twist and just ...
+(frame key_snap)
+<i>snap</i>
+. . . .
+(frame key_shock)
+THE... THE KEY SNAPPED!!
+What do I do now?!
+(frame none)
+Ok, ok. A spare. There must be a spare. But where?
+Maybe the safe? I mean, if there was to be a spare, it should be there

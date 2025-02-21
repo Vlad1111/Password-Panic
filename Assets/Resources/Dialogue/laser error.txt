@@ -1,0 +1,7 @@
+(frame angry)
+WHAT DO YOU MEAN ERROR?!
+DON'T THEY CHECK THIS STUFF REGULARLY?
+Do I have to do Joe's job here?
+(frame none)
+I'm not payed enough for this
+<i>context:the pay is 20M$ per year</i>

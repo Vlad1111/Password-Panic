@@ -27,6 +27,7 @@ public class ComputerBehaviour : MonoBehaviour
         speed = -10;
         transform.localScale = new Vector3(1, 1, 1);
         ScreenBahaviour.Instance.SetCameraLocation("Desk");
+        SoundManager.Instance.PlayClip("Click");
     }
 
     private void Update()

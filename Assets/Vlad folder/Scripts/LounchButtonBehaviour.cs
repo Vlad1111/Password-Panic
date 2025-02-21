@@ -10,11 +10,12 @@ public class LounchButtonBehaviour : MonoBehaviour
         var hasKeyFound = GameBehaviour.GetGlobalValue(GameVariableKeys.SpareKeyFound.ToString()) > 0.5f;
         if(!hasKeySnapped)
         {
+            DialogueBehaviour.Instance.ShowDialogueFromFile("key snap");
             GameBehaviour.SetGlobalValue(GameVariableKeys.KeySnapped.ToString(), 1);
         }
         else if(!hasKeyFound)
         {
-
+            DialogueBehaviour.Instance.ShowLine("I need to finde the spare key in the safe");
         }
         else
         {

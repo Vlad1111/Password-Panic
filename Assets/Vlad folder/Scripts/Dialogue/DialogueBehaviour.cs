@@ -1,7 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
+[System.Serializable]
+public class SpriteAnimation
+{
+    [System.Serializable]
+    public class SpriteAnimationFrame
+    {
+        public Sprite sprite;
+        public float time;
+    }
+    public string name;
+    public SpriteAnimationFrame[] frames;
+}
 public class DialogueBehaviour : MonoBehaviour
 {
     public static DialogueBehaviour Instance;
@@ -13,17 +27,47 @@ public class DialogueBehaviour : MonoBehaviour
     public LineDisplayController lineController;
     public Transform lineParent;
 
+    [Space(20)]
     public List<string> lines = new List<string>();
     public List<string> commands = new List<string>();
     public int currentLine = 0;
+
+    [Space(20)]
+    public Image characterImage;
+    public SpriteAnimation[] spriteAnimation;
+    private int animationIndex = -1;
+    private int frameIndex = 0;
+    private float frameTime = 0;
+
     private void Start()
     {
-        lineParent.gameObject.SetActive(false);
+        //lineParent.gameObject.SetActive(false);
     }
 
     private void ComputeCommand(string command)
     {
         if (command == "") return;
+        var cmds = command.Split(' ');
+        switch (cmds[0].ToLower())
+        {
+            case "auto":
+                lineController.SetOneAutoPlayLineTime(float.Parse(cmds[1]));
+                break;
+            case "speed":
+                lineController.setSpeed(float.Parse(cmds[1]));
+                break;
+            case "frame":
+                animationIndex = -1;
+                for (int i = 0; i < spriteAnimation.Length; i++)
+                    if (spriteAnimation[i].name == cmds[1])
+                    {
+                        animationIndex = i;
+                        frameIndex = 0;
+                        frameTime = 0;
+                        break;
+                    }
+                break;
+        }
     }
 
     public void LineEnded()
@@ -41,6 +85,9 @@ public class DialogueBehaviour : MonoBehaviour
 
     private void StartDialogue()
     {
+        animationIndex = -1;
+        currentLine = 0;
+        ComputeCommand(commands[currentLine]);
         lineController.showLine(lines[currentLine]);
         lineParent.gameObject.SetActive(true);
         GameBehaviour.Instance.DialogueChengedState(true);
@@ -50,7 +97,6 @@ public class DialogueBehaviour : MonoBehaviour
     {
         lines = new List<string>(new[] {line});
         commands = new List<string>(new[] { "" });
-        currentLine = 0;
         StartDialogue();
     }
 
@@ -64,7 +110,7 @@ public class DialogueBehaviour : MonoBehaviour
         {
             if (l.Length > 2 && l[0]=='(' && l[l.Length-2]==')')
             {
-                var c = l.Substring(1, l.Length - 2);
+                var c = l.Substring(1, l.Length - 3);
                 commands.Add(c);
                 alreadyAddedCommand = true;
             }
@@ -76,6 +122,41 @@ public class DialogueBehaviour : MonoBehaviour
                 alreadyAddedCommand = false;
             }
         }
-        
+        StartDialogue();
+    }
+
+    public void ShowDialogueFromFile(string file)
+    {
+        var path = Path.Join("Dialogue", file);
+        var txt = Resources.Load<TextAsset>(path);
+        if (txt != null)
+            ShowDialogue(txt.ToString().Split('\n'));
+    }
+
+    private void Update()
+    {
+        if (animationIndex < 0)
+        {
+            characterImage.sprite = null;
+            characterImage.color = new Color(1, 1, 1, 0);
+        }
+        else
+        {
+            characterImage.sprite = spriteAnimation[animationIndex].frames[frameIndex].sprite;
+            characterImage.color = new Color(1, 1, 1, 1);
+            if (spriteAnimation[animationIndex].frames.Length != 1)
+            {
+                frameTime += Time.deltaTime;
+                if (frameTime > spriteAnimation[animationIndex].frames[frameIndex].time)
+                {
+                    frameTime -= spriteAnimation[animationIndex].frames[frameIndex].time;
+                    frameIndex++;
+                    if (frameIndex >= spriteAnimation[animationIndex].frames.Length)
+                    {
+                        frameIndex = 0;
+                    }
+                }
+            }
+        }
     }
 }

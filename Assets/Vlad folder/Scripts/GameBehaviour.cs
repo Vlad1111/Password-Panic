@@ -14,6 +14,12 @@ public class GameBehaviour : MonoBehaviour
         public string chainValue;
         public string[] possibleValues;
     }
+    [System.Serializable]
+    public class BacgroundMusicTrigger
+    {
+        public float afterTime;
+        public AudioClip music;
+    }
 
     public static GameBehaviour Instance;
 
@@ -70,6 +76,9 @@ public class GameBehaviour : MonoBehaviour
     }
 
     public float remaingTime;
+    public List<BacgroundMusicTrigger> musicTime;
+    private int musicIndex = -1;
+    private float initialTimeCount;
     public TMP_Text countdownDisplyText;
     public string laserPassword;
     public List<RandomValues> randomValues;
@@ -80,8 +89,8 @@ public class GameBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //laserPassword = ReplaceKeyWorld(laserPassword).ToString();
-        DialogueBehaviour.Instance.ShowLine("Let's start this laser");
+        DialogueBehaviour.Instance.ShowDialogueFromFile("intro");
+        initialTimeCount = remaingTime;
     }
 
     private int[] daysInMonths = new[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
@@ -230,6 +239,15 @@ public class GameBehaviour : MonoBehaviour
             else
                 countdownDisplyText.text += seconds;
             remaingTime -= Time.deltaTime;
+
+
+            var timeSinceStart = initialTimeCount - remaingTime;
+            //Debug.Log("Music " + timeSinceStart + " " + musicIndex + " " + musicTime.Count);
+            if(musicIndex < musicTime.Count - 1 && timeSinceStart >= musicTime[musicIndex + 1].afterTime)
+            {
+                musicIndex++;
+                SoundManager.Instance.PlayMusic(musicTime[musicIndex].music);
+            }
         }
     }
 }

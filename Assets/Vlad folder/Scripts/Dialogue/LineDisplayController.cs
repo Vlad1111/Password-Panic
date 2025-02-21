@@ -278,7 +278,7 @@ public class LineDisplayController : MonoBehaviour
             bool autoPlay = false;
             if (autoPlayTime >= 0)
             {
-                autoPlayTime -= Time.deltaTime;
+                autoPlayTime -= Time.deltaTime * textSpeed;
                 if (autoPlayTime < 0)
                 {
                     autoPlayTime = -1;

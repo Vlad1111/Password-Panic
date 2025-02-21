@@ -32,7 +32,8 @@ public class CameraPosition
     public Quaternion rotation;
     public CameraPositionCondition[] conditions;
 }
-[ExecuteInEditMode]
+
+//[ExecuteInEditMode]
 public class ScreenBahaviour : MonoBehaviour
 {
     public static ScreenBahaviour Instance;

@@ -1,0 +1,14 @@
+(frame coffee)
+I still can't believe I got this easy job
+(frame coffee_drink)
+I mean... what are the chances an actual asteroid will appear out of nowhere
+(frame coffee_spit)
+<b>ALARM:A NEW ASTEROID WAS DETECTED</b>
+<b>ALARM:IT WILL COLLIDE WITH THE EARTH IN T:-20 MINUTES</b>
+(frame coffee_end)
+. . .
+(frame none)
+AN ACTUALLY ASTEROID?!
+Ok, no worry. This is why I'm here
+I just have to charge the laser and the asteroid will go <b>BOOM</b>
+... you know. before we go boom

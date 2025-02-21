@@ -111,6 +111,22 @@ public class PasswordRuleCheck_CheckRegex : PasswordRuleCheck
         return rg.IsMatch(text);
     }
 }
+public class PasswordRuleCheck_CheckRegexNegative : PasswordRuleCheck
+{
+    public string regex;
+    private Regex rg;
+    public PasswordRuleCheck_CheckRegexNegative(string regex)
+    {
+        this.regex = regex;
+        this.text = "the new password mathces the regex pattern " + regex;
+        rg = new Regex(regex);
+    }
+
+    public override bool Check(string text)
+    {
+        return !rg.IsMatch(text);
+    }
+}
 public class PasswordRuleCheck_RomanNuberSum : PasswordRuleCheck
 {
     public int sum;
@@ -209,8 +225,8 @@ public class LaserWindowBehaviour : MonoBehaviour
             text = "The password needs to contain a month of the year"
         },
         new PasswordRuleCheck_CheckDigitsSum(10, 1),
-        new PasswordRuleCheck_ContainsWords(new string[] { "Apple", "Mango", "Kiwi", "Pineapple", "Tomato", "Orange" }, true),
-        new PasswordRuleCheck_ContainsWords(new string[] { "[pet name]" }, true)
+        new PasswordRuleCheck_ContainsWords(new string[] { "APPLE", "MANGO", "KIWI", "PINEAPPLE", "TOMATO", "ORANGE" }, true),
+        new PasswordRuleCheck_ContainsWords(new string[] { "[pet name]" }, false)
         {
             text = "The password must contain the name of the pet"
         },
@@ -225,9 +241,17 @@ public class LaserWindowBehaviour : MonoBehaviour
         },
         new PasswordRuleCheck_CheckDigitsSum(20, -1),
         new PasswordRuleCheck_RomanNuberSum(9, 2),
+        new PasswordRuleCheck_CheckRegexNegative(".*\\d*[02468][a-zA-Z\\s\\t&]")
+        {
+            text = "The password can not contain even numbers"
+        },
         new PasswordRuleCheck_ContainsWords(new string[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" }, false)
         {
             text = "The password needs to contain a day of the week"
+        },
+        new PasswordRuleCheck_CheckRegexNegative("[a-z]")
+        {
+            text = "The password must be all caps"
         },
     };
 
@@ -250,6 +274,7 @@ public class LaserWindowBehaviour : MonoBehaviour
     }
     public void Open()
     {
+        SoundManager.Instance.PlayClip("Click");
         laserWindowParent.gameObject.SetActive(true);
         HideAll();
 
@@ -259,6 +284,11 @@ public class LaserWindowBehaviour : MonoBehaviour
         if (!foundPassword)
         {
             enterPasswordParent.gameObject.SetActive(true);
+            if(GameBehaviour.GetGlobalValue("dialogue_forgot_password") < 0.5f)
+            {
+                GameBehaviour.SetGlobalValue("dialogue_forgot_password", 1);
+                DialogueBehaviour.Instance.ShowDialogueFromFile("forgot password");
+            }
         }
         else if (!didResetPassword)
         {
@@ -267,7 +297,7 @@ public class LaserWindowBehaviour : MonoBehaviour
         }
         else
         {
-            var isLaserCharged = GameBehaviour.GetGlobalValue(GameVariableKeys.PasswordReseted.ToString()) > 0.5f;
+            var isLaserCharged = GameBehaviour.GetGlobalValue(GameVariableKeys.LaserCharged.ToString()) > 0.5f;
             if (isLaserCharged)
             {
                 laserCarge = laserChargeSprites.Length - 0.5f;
@@ -279,6 +309,7 @@ public class LaserWindowBehaviour : MonoBehaviour
 
     public void Close()
     {
+        SoundManager.Instance.PlayClip("Click");
         laserWindowParent.gameObject.SetActive(false);
     }
 
@@ -289,6 +320,12 @@ public class LaserWindowBehaviour : MonoBehaviour
             HideAll();
             GameBehaviour.SetGlobalValue(GameVariableKeys.FoundPassword.ToString(), 1);
             changePasswordParent.gameObject.SetActive(true);
+            if (GameBehaviour.GetGlobalValue("dialogue_change_password") < 0.5f)
+            {
+                GameBehaviour.SetGlobalValue("dialogue_change_password", 1);
+                DialogueBehaviour.Instance.ShowLine("Oh. COME. <b>ON!</b>");
+            }
+            SoundManager.Instance.PlayClip("Correct");
         }
     }
 
@@ -316,7 +353,14 @@ public class LaserWindowBehaviour : MonoBehaviour
             }
         }
         if (checkCount == passwordChecks.Length)
+        {
             lastRuledPassed = passwordChecks.Length;
+            SoundManager.Instance.PlayClip("Correct");
+        }
+        else
+        {
+            SoundManager.Instance.PlayClip("Buzzer");
+        }
         foreach (Transform child in newPasswordErrorParent)
             Destroy(child.gameObject);
         for (int i = 0; i <= lastRuledPassed && i < passwordChecks.Length; i++)
@@ -342,12 +386,18 @@ public class LaserWindowBehaviour : MonoBehaviour
             HideAll();
             laserControllParent.gameObject.SetActive(true);
             GameBehaviour.SetGlobalValue(GameVariableKeys.PasswordReseted.ToString(), 1);
+            if (GameBehaviour.GetGlobalValue("dialogue_password_reset") < 0.5f)
+            {
+                GameBehaviour.SetGlobalValue("dialogue_password_reset", 1);
+                DialogueBehaviour.Instance.ShowLine("God damn finally!");
+            }
         }
     }
 
     public void ChargeLaser()
     {
         laserChargeDirection = 1;
+        SoundManager.Instance.PlayClip("Chargin up");
     }
 
     public void ArmLaser()
@@ -385,12 +435,19 @@ public class LaserWindowBehaviour : MonoBehaviour
                                         "The wire pannel is now opened\n" +
                                         "Please connect the wires back together";
                 laserChargeDirection = -6;
-                laserCarge -= 1;
+                laserCarge -= 2;
                 GameBehaviour.SetGlobalValue(GameVariableKeys.WireNeedRepering.ToString(), 1);
+                if (GameBehaviour.GetGlobalValue("dialogue_laser_error") < 0.5f)
+                {
+                    GameBehaviour.SetGlobalValue("dialogue_laser_error", 1);
+                    DialogueBehaviour.Instance.ShowDialogueFromFile("laser error");
+                }
+                SoundManager.Instance.PlayClip("Power down");
             }
             else
             {
                 GameBehaviour.SetGlobalValue(GameVariableKeys.LaserCharged.ToString(), 1);
+                laserChargeImage.sprite = laserChargeSprites[laserChargeSprites.Length - 1];
                 errorLaserText.text = "Laser fully charged";
             }
         }
