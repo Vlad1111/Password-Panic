@@ -2,7 +2,7 @@
 I still can't believe I got this easy job
 (frame coffee_drink)
 I mean... what are the chances an actual asteroid will appear out of nowhere
-(frame coffee_spit)
+(frame coffee_spit;sfx Alarm)
 <b>ALARM:A NEW ASTEROID WAS DETECTED</b>
 <b>ALARM:IT WILL COLLIDE WITH THE EARTH IN T:-20 MINUTES</b>
 (frame coffee_end)

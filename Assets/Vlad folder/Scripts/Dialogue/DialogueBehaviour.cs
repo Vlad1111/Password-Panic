@@ -54,7 +54,7 @@ public class DialogueBehaviour : MonoBehaviour
         //lineParent.gameObject.SetActive(false);
     }
 
-    private void ComputeCommand(string command)
+    private void ComputeOneCommand(string command)
     {
         if (command == "") return;
         var cmds = command.Split(' ');
@@ -77,7 +77,17 @@ public class DialogueBehaviour : MonoBehaviour
                         break;
                     }
                 break;
+            case "sfx":
+                SoundManager.Instance.PlayClip(cmds[1]);
+                break;
         }
+    }
+
+    private void ComputeCommand(string command)
+    {
+        var cmds = command.Split(';');
+        foreach (var m in cmds)
+            ComputeOneCommand(m);
     }
 
     public void LineEnded()
