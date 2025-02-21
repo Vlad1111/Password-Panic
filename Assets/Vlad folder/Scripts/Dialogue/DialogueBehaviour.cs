@@ -39,6 +39,16 @@ public class DialogueBehaviour : MonoBehaviour
     private int frameIndex = 0;
     private float frameTime = 0;
 
+    [Space(20)]
+    public Transform endParent;
+    public Transform playAgainParent;
+    public Image endImage;
+    public SpriteAnimation goodEndAnimation;
+    public SpriteAnimation badEndAnimation;
+    private int endIndex = -1;
+    private int endFrameIndex = 0;
+    private float endFrameTime = 0;
+
     private void Start()
     {
         //lineParent.gameObject.SetActive(false);
@@ -133,6 +143,28 @@ public class DialogueBehaviour : MonoBehaviour
             ShowDialogue(txt.ToString().Split('\n'));
     }
 
+    public void PlayGoodEnding()
+    {
+        GameBehaviour.Instance.StopTimmer();
+
+        endIndex = 1;
+        endFrameIndex = 0;
+        endFrameTime = 0;
+
+        endParent.gameObject.SetActive(true);
+    }
+
+    public void PlayBadEnding()
+    {
+        GameBehaviour.Instance.StopTimmer();
+
+        endIndex = 2;
+        endFrameIndex = 0;
+        endFrameTime = 0;
+
+        endParent.gameObject.SetActive(true);
+    }
+
     private void Update()
     {
         if (animationIndex < 0)
@@ -156,6 +188,26 @@ public class DialogueBehaviour : MonoBehaviour
                         frameIndex = 0;
                     }
                 }
+            }
+        }
+
+        if(endIndex > 0)
+        {
+            var end = endIndex == 1 ? goodEndAnimation : badEndAnimation;
+            if(endFrameIndex < end.frames.Length)
+            {
+                endImage.sprite = end.frames[endFrameIndex].sprite;
+                endFrameTime += Time.deltaTime;
+                if(endFrameTime > end.frames[endFrameIndex].time)
+                {
+                    endFrameTime -= end.frames[endFrameIndex].time;
+                    endFrameIndex++;
+                }
+            }
+            else
+            {
+                endFrameIndex = 0;
+                playAgainParent.gameObject.SetActive(true);
             }
         }
     }

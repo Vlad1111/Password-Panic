@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameBehaviour : MonoBehaviour
 {
@@ -84,13 +85,22 @@ public class GameBehaviour : MonoBehaviour
     public List<RandomValues> randomValues;
     private Dictionary<string, string> randomValuesDictionary = new Dictionary<string, string>();
 
+    public Transform asteroid;
+    public Vector3 originalAsteroidPosition;
+    public Transform asteroidTarget;
+
     private bool isDialogueOn = false;
+    private bool iSTimmerStopped = false;
 
     // Start is called before the first frame update
     void Start()
     {
         DialogueBehaviour.Instance.ShowDialogueFromFile("intro");
         initialTimeCount = remaingTime;
+
+        originalAsteroidPosition = asteroid.localPosition;
+
+        ShowCountDown();
     }
 
     private int[] daysInMonths = new[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
@@ -227,18 +237,44 @@ public class GameBehaviour : MonoBehaviour
         isDialogueOn = newActive;
     }
 
+    public void StopTimmer()
+    {
+        iSTimmerStopped = true;
+    }
+
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void ShowCountDown()
+    {
+        countdownDisplyText.text = ((int)(remaingTime / 60)) + ":";
+        int seconds = ((int)remaingTime) % 60;
+        if (seconds < 10)
+            countdownDisplyText.text += "0" + seconds;
+        else
+            countdownDisplyText.text += seconds;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if(!isDialogueOn)
+        if(!isDialogueOn && !iSTimmerStopped)
         {
-            countdownDisplyText.text = ((int)(remaingTime / 60)) + ":";
-            int seconds = ((int)remaingTime) % 60;
-            if (seconds < 10)
-                countdownDisplyText.text += "0" + seconds;
-            else
-                countdownDisplyText.text += seconds;
+            ShowCountDown();
             remaingTime -= Time.deltaTime;
+
+            if(remaingTime < 0)
+            {
+                DialogueBehaviour.Instance.PlayBadEnding();
+                return;
+            }
 
 
             var timeSinceStart = initialTimeCount - remaingTime;
@@ -248,6 +284,9 @@ public class GameBehaviour : MonoBehaviour
                 musicIndex++;
                 SoundManager.Instance.PlayMusic(musicTime[musicIndex].music);
             }
+
+            var d = timeSinceStart / initialTimeCount;
+            asteroid.localPosition = Vector3.Lerp(originalAsteroidPosition, asteroidTarget.localPosition, d);
         }
     }
 }

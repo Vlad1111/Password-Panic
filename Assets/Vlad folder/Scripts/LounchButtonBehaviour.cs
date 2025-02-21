@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LounchButtonBehaviour : MonoBehaviour
 {
+    public Transform launchButton;
+
     public void UseKey()
     {
         var hasKeySnapped = GameBehaviour.GetGlobalValue(GameVariableKeys.KeySnapped.ToString()) > 0.5f;
@@ -20,6 +22,12 @@ public class LounchButtonBehaviour : MonoBehaviour
         else
         {
             GameBehaviour.SetGlobalValue(GameVariableKeys.LaserArmed.ToString(), 1);
+            launchButton.gameObject.SetActive(true);
         }
+    }
+
+    public void Launch()
+    {
+        DialogueBehaviour.Instance.PlayGoodEnding();
     }
 }
