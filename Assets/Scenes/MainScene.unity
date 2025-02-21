@@ -6416,6 +6416,16 @@ MonoBehaviour:
     playAfterLastTimeSlice: 0
     isItLoop: 0
     startAfterSeconds: 0
+  - name: Alarm
+    clips:
+    - {fileID: 8300000, guid: 7a1840eaa733d964eac39393fb52ae8f, type: 3}
+    source: {fileID: 0}
+    volume: {x: 1, y: 1}
+    pitch: {x: 2, y: 2}
+    spacialBlend: 0
+    playAfterLastTimeSlice: 0
+    isItLoop: 0
+    startAfterSeconds: 0
 --- !u!4 &2133943984
 Transform:
   m_ObjectHideFlags: 0

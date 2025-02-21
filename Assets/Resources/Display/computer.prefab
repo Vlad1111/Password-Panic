@@ -2527,6 +2527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38fad19d648b6124daf39012adae7eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LaserAnimator: {fileID: 0}
   emailBehaviour: {fileID: 8053940796991965845}
   scale: 0
 --- !u!114 &8053940796991965845

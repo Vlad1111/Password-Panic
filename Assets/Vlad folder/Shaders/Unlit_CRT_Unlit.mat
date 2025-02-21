@@ -27,6 +27,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 0e00d29104261e0408a146a79afa566c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Mask:
+        m_Texture: {fileID: 2800000, guid: 39670d87472993b4ea4756213bede761, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _CutoutThreshold: 0.316

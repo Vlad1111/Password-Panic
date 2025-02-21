@@ -3,6 +3,7 @@ Shader "Unlit/CRT_Unlit"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _Mask ("Texture", 2D) = "white" {}
         _ScanLineAlpha ("Scan Line Alpha", Range(0, 1)) = 0.5
         _ScanSpeed ("Scan Speed", Range(0, 1)) = 0.5
         _ScanLineSize ("Scan Line Size", Range(0, 2)) = 0.1
@@ -42,6 +43,7 @@ Shader "Unlit/CRT_Unlit"
             };
 
             sampler2D _MainTex;
+            sampler2D _Mask;
             float4 _MainTex_ST; // don't remove this
             float _ScanLineAlpha;
             float _ScanSpeed;
@@ -68,7 +70,8 @@ Shader "Unlit/CRT_Unlit"
                 // Method B - More complex but more realistic
 
                 fixed4 col = tex2D(_MainTex, (i.uv + _Time.y * _ScanSpeed) * _ScanLineSize);
-                col.a = col.r * _ScanLineAlpha;
+                fixed4 mask = tex2D(_Mask, i.uv);
+                col.a = col.r * _ScanLineAlpha * mask.r;
                 col.rgb = fixed3(0, 0, 0);
 
                 // Not needed but might be useful for other methods of creating the effect

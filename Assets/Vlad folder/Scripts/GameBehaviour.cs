@@ -53,10 +53,10 @@ public class GameBehaviour : MonoBehaviour
         randomValuesDictionary.Add("chain2", randomValues[parts[1]].chainValue);
         randomValuesDictionary.Add("chain3", randomValues[parts[2]].chainValue);
         randomValuesDictionary.Add("chain4", randomValues[parts[3]].chainValue);
-        //laserPassword = randomValuesDictionary[randomValues[parts[0]].key] +
-        //                randomValuesDictionary[randomValues[parts[1]].key] +
-        //                randomValuesDictionary[randomValues[parts[2]].key] +
-        //                randomValuesDictionary[randomValues[parts[3]].key];
+        laserPassword = randomValuesDictionary[randomValues[parts[0]].key] +
+                        randomValuesDictionary[randomValues[parts[1]].key] +
+                        randomValuesDictionary[randomValues[parts[2]].key] +
+                        randomValuesDictionary[randomValues[parts[3]].key];
     }
 
     public static float GetGlobalValue(string key)
