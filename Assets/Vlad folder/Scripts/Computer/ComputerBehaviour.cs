@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ComputerBehaviour : MonoBehaviour
 {
+    public Animator LaserAnimator;
     public EmailBehaviour emailBehaviour;
 
     public float scale = 0;
@@ -28,6 +29,13 @@ public class ComputerBehaviour : MonoBehaviour
         transform.localScale = new Vector3(1, 1, 1);
         ScreenBahaviour.Instance.SetCameraLocation("Desk");
         SoundManager.Instance.PlayClip("Click");
+
+        if(GameBehaviour.GetGlobalValue(GameVariableKeys.LaserCharged.ToString()) >= 0.5f)
+            if(GameBehaviour.GetGlobalValue("Animation_LaserArmed") < 0.5f)
+            {
+                LaserAnimator.Play("LaserArm");
+                GameBehaviour.SetGlobalValue("Animation_LaserArmed", 1);
+            }
     }
 
     private void Update()

@@ -231,10 +231,10 @@ public class LaserWindowBehaviour : MonoBehaviour
         },
         new PasswordRuleCheck_CheckDigitsSum(10, 1),
         new PasswordRuleCheck_ContainsWords(new string[] { "APPLE", "MANGO", "KIWI", "PINEAPPLE", "TOMATO", "ORANGE" }, true),
-        new PasswordRuleCheck_ContainsWords(new string[] { "[pet name]" }, false)
-        {
-            text = "The password must contain the name of the pet"
-        },
+        //new PasswordRuleCheck_ContainsWords(new string[] { "[pet name]" }, false)
+        //{
+        //    text = "The password must contain the name of the pet"
+        //},
         new PasswordRuleCheck_CheckRegex(".*(?=[MDCLXVI])M*(C[MD]|D?C{0,3})(X[CL]|L?X{0,3})(I[XV]|V?I{0,3}).*")
         {
             text = "The password must contain a roman number"

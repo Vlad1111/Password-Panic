@@ -5,6 +5,8 @@ using UnityEngine;
 public class LounchButtonBehaviour : MonoBehaviour
 {
     public Transform launchButton;
+    public Animator animator;
+    public Transform key;
 
     public void UseKey()
     {
@@ -23,6 +25,8 @@ public class LounchButtonBehaviour : MonoBehaviour
         {
             GameBehaviour.SetGlobalValue(GameVariableKeys.LaserArmed.ToString(), 1);
             launchButton.gameObject.SetActive(true);
+            animator.Play("KeyOpenButton");
+            key.gameObject.SetActive(true);
         }
     }
 

@@ -146,6 +146,7 @@ public class DialogueBehaviour : MonoBehaviour
     public void PlayGoodEnding()
     {
         GameBehaviour.Instance.StopTimmer();
+        SoundManager.Instance.PlayMusic("epic-adventure-heroic-pirates-award-winner-sport-victory-123488");
 
         endIndex = 1;
         endFrameIndex = 0;
@@ -157,6 +158,7 @@ public class DialogueBehaviour : MonoBehaviour
     public void PlayBadEnding()
     {
         GameBehaviour.Instance.StopTimmer();
+        SoundManager.Instance.PlayMusic("somber-piano-composition-2-with-melodic-high-notes-10093");
 
         endIndex = 2;
         endFrameIndex = 0;
@@ -206,7 +208,7 @@ public class DialogueBehaviour : MonoBehaviour
             }
             else
             {
-                endFrameIndex = 0;
+                //endFrameIndex = 0;
                 playAgainParent.gameObject.SetActive(true);
             }
         }

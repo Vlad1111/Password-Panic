@@ -13,6 +13,8 @@ public class SafeBehaviour : MonoBehaviour
     private float timmer = 0.01f;
     private float targetRotation = 0;
 
+    public Animator safeAnimator;
+
     private void Start()
     {
         for (int i = 0; i < codeLenght; i++)
@@ -53,6 +55,7 @@ public class SafeBehaviour : MonoBehaviour
                     GameBehaviour.SetGlobalValue("dialogue_safe_cracked", 1);
                     DialogueBehaviour.Instance.ShowDialogueFromFile("safe opened");
                 }
+                safeAnimator.Play("SafeOpen");
             }
         }
         else

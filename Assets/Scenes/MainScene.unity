@@ -407,13 +407,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe5bd25f25bdc44f9f25c5ea1f33b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  remaingTime: 10
+  remaingTime: 1200
   musicTime:
   - afterTime: 0
     music: {fileID: 8300000, guid: 6dffdad83b6bff346b66daf0edfcd6aa, type: 3}
-  - afterTime: 10
+  - afterTime: 600
     music: {fileID: 8300000, guid: d975a0673fc285e44a64e18ec9637ff8, type: 3}
-  - afterTime: 20
+  - afterTime: 1020
     music: {fileID: 8300000, guid: 4600edc64e20f0f49a99ebe9a1a8d216, type: 3}
   countdownDisplyText: {fileID: 1171727868}
   laserPassword: 
@@ -788,6 +788,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 107160692}
   m_CullTransparentMesh: 1
+--- !u!1 &113886151 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9cc580a508fb7fa46aa7366b0fc48d8d,
+    type: 3}
+  m_PrefabInstance: {fileID: 296792608}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &120530727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1079,7 +1085,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1897114985}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9cc580a508fb7fa46aa7366b0fc48d8d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 296792610}
   m_SourcePrefab: {fileID: 100100000, guid: 9cc580a508fb7fa46aa7366b0fc48d8d, type: 3}
 --- !u!4 &296792609 stripped
 Transform:
@@ -1087,6 +1097,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 296792608}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &296792610
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113886151}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9bf84dac7cda97d4885f6b4920e92fa7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &322491091
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1481,6 +1512,7 @@ MonoBehaviour:
   correctIndicator: {fileID: 1900477069}
   incorectIndicator: {fileID: 945150993}
   code: 
+  safeAnimator: {fileID: 1717902648}
 --- !u!1 &642563792
 GameObject:
   m_ObjectHideFlags: 0
@@ -1782,6 +1814,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   launchButton: {fileID: 2031656347}
+  animator: {fileID: 1717902648}
+  key: {fileID: 8086706275916566726}
 --- !u!1 &750982805
 GameObject:
   m_ObjectHideFlags: 0
@@ -5907,7 +5941,19 @@ MonoBehaviour:
   mr: {fileID: 0}
   onClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 749228806}
+        m_TargetAssemblyTypeName: LounchButtonBehaviour, Assembly-CSharp
+        m_MethodName: Launch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &2031656349
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6219,7 +6265,37 @@ MonoBehaviour:
   endImage: {fileID: 1131478882}
   goodEndAnimation:
     name: 
-    frames: []
+    frames:
+    - sprite: {fileID: 21300000, guid: 98e86dbf8d6bcd54baa01700a82a52f8, type: 3}
+      time: 0.1
+    - sprite: {fileID: 21300000, guid: e8005efb20fa3c14c94e4014d55dfaf3, type: 3}
+      time: 0.1
+    - sprite: {fileID: 21300000, guid: e9715260738c51f4c9bdb8a35c6e7b64, type: 3}
+      time: 0.1
+    - sprite: {fileID: 21300000, guid: aed278469334ec342bc64a478d02a312, type: 3}
+      time: 0.1
+    - sprite: {fileID: 21300000, guid: fe1d690312e14a44986cd39e6daef3f4, type: 3}
+      time: 0.1
+    - sprite: {fileID: 21300000, guid: 8487de4f09acc8c4ca9d80d6bdc8bfbd, type: 3}
+      time: 0.1
+    - sprite: {fileID: 21300000, guid: ea4541b918098fa44a21941ec6ae7579, type: 3}
+      time: 0.1
+    - sprite: {fileID: 21300000, guid: 3f8871f953c489a4bbf6bdf7ed9035cf, type: 3}
+      time: 0.1
+    - sprite: {fileID: 21300000, guid: 5c090d5e7af10c745abe967fa9bfcf7a, type: 3}
+      time: 0.1
+    - sprite: {fileID: 21300000, guid: 763b5d0bf38f4144fb448cd02313e78d, type: 3}
+      time: 0.1
+    - sprite: {fileID: 21300000, guid: 3499ef8122ea2604fa2f7bfcf7f26f88, type: 3}
+      time: 0.1
+    - sprite: {fileID: 21300000, guid: 648e4a451cb7a9c4b9be068003fba9b7, type: 3}
+      time: 0.1
+    - sprite: {fileID: 21300000, guid: fbc6f41979c66404d8063e317ff15608, type: 3}
+      time: 0.1
+    - sprite: {fileID: 21300000, guid: a8f7f7679663cd04bbd5991f6081fc12, type: 3}
+      time: 0.08
+    - sprite: {fileID: 21300000, guid: 05d7501c9a4f93d43a147454b4c0817b, type: 3}
+      time: 0.5
   badEndAnimation:
     name: 
     frames:
@@ -6236,7 +6312,7 @@ MonoBehaviour:
     - sprite: {fileID: 21300000, guid: c45f962ca58dccc41b4b2b13dfeac149, type: 3}
       time: 0.08
     - sprite: {fileID: 21300000, guid: 413e1c848ad7c224fb9f38494f21775b, type: 3}
-      time: 0.3
+      time: 0.5
 --- !u!1 &2133943982
 GameObject:
   m_ObjectHideFlags: 0
@@ -6946,7 +7022,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 763358010862627506}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000021855692, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.00000002185569, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.0718093, y: -2.3279, z: 0.9876634}
   m_LocalScale: {x: 34.543236, y: 34.543236, z: 34.543236}
   m_ConstrainProportionsScale: 0
