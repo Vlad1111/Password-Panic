@@ -92,6 +92,8 @@ public class GameBehaviour : MonoBehaviour
     private bool isDialogueOn = false;
     private bool iSTimmerStopped = false;
 
+    public SettingsWindow setting;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -101,6 +103,8 @@ public class GameBehaviour : MonoBehaviour
         originalAsteroidPosition = asteroid.localPosition;
 
         ShowCountDown();
+
+        setting.Start();
     }
 
     private int[] daysInMonths = new[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };

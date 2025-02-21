@@ -519,6 +519,7 @@ MonoBehaviour:
   asteroid: {fileID: 1673075050}
   originalAsteroidPosition: {x: 0, y: 0, z: 0}
   asteroidTarget: {fileID: 337122898}
+  setting: {fileID: 1498401302}
 --- !u!1 &20553361
 GameObject:
   m_ObjectHideFlags: 0
@@ -4191,6 +4192,18 @@ MonoBehaviour:
   wirePrefab: {fileID: 9188593023008419242, guid: 64f1c54804ae0da419df18e4b7c484c3,
     type: 3}
   debugItem: {fileID: 788014880}
+--- !u!114 &1498401302 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 199151671940774209, guid: bf5513f99cd73984f80bbf625ad4db40,
+    type: 3}
+  m_PrefabInstance: {fileID: 8348257882073355277}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51a310b76e314a429397b6dfaa09d1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1505982204
 GameObject:
   m_ObjectHideFlags: 0
