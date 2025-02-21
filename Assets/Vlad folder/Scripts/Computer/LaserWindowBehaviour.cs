@@ -46,10 +46,11 @@ public class PasswordRuleCheck_ContainsWords : PasswordRuleCheck
         else
         {
             this.text += "\nIt does not need to be case sensitive";
-            for (int i = 0; i < this.words[0].Length; i++)
-            {
-                this.words[i] = this.words[i].ToLower();
-            }
+            for (int i = 0; i < this.words.Length; i++)
+                if (!this.words[i].StartsWith('[') || !this.words[i].EndsWith(']'))
+                {
+                    this.words[i] = this.words[i].ToLower();
+                }
         }
     }
 
@@ -57,8 +58,12 @@ public class PasswordRuleCheck_ContainsWords : PasswordRuleCheck
     {
         if(!hasChangedKeyWords)
         {
-            for(int i=0; i < words.Length; i++)
+            for (int i = 0; i < words.Length; i++)
+            {
                 this.words[i] = GameBehaviour.Instance.ReplaceKeyWorld(this.words[i]).ToString();
+                if (!isCaseSensitive)
+                    this.words[i] = this.words[i].ToLower();
+            }
             hasChangedKeyWords = true;
         }
         if(!isCaseSensitive)
