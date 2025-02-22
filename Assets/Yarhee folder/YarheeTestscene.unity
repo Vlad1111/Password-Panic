@@ -9174,6 +9174,22 @@ MonoBehaviour:
     - Rex
     - Bubbles
     - Jonny
+    - Bark
+    - Han
+    - Waffle
+    - Crystal
+    - Mayhem
+    - Danny
+    - Trixie
+    - Spot
+    - Pup
+    - Poppy
+    - Pluto
+    - Lenny
+    - Pancake
+    - Bulldog
+    - Jasper
+    - Ruby
   - key: Name
     isUsedInPassword: 1
     chainValue: your name
@@ -9182,14 +9198,51 @@ MonoBehaviour:
     - Ariel
     - Angel
     - Noah
+    - Jake
+    - Jay
+    - Joe
+    - Max
+    - Matthew
+    - Kim
+    - Sam
+    - Samwise
+    - Nick
+    - Peter
+    - Polly
+    - Jamerson
+    - Jack
+    - Alfie
+    - Cartman
+    - Timmy
+    - Jimmy
+    - Huey
+    - Hughie
+    - William
+    - Rick
+    - Richard
+    - Roxy
+    - Amber
+    - Lex
+    - Glenn
   - key: Birthplace
     isUsedInPassword: 1
     chainValue: your birthplace
     possibleValues:
-    - Texax
+    - Texas
     - Canada
     - Brasov
     - London
+    - York
+    - Chicago
+    - Tokyo
+    - Boston
+    - Paris
+    - Moscow
+    - Rio
+    - Finland
+    - Mexico
+    - Berlin
+    - Detroit
   - key: Sister name
     isUsedInPassword: 1
     chainValue: your sister name
@@ -9198,14 +9251,46 @@ MonoBehaviour:
     - Mia
     - Ava
     - Sofia
+    - Jenny
+    - Angelica
+    - Angel
+    - Pearl
+    - Joy
+    - Genine
+    - Jessica
+    - Yasmin
+    - Kari
+    - Daisy
+    - Willow
+    - Abby
+    - Happy
+    - Mabel
+    - Louise
+    - Frankie
   - key: Sister birth_Day
     isUsedInPassword: 1
     chainValue: the day your sister was born
     possibleValues:
-    - 1
     - 2
     - 3
     - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
   - key: pet type
     isUsedInPassword: 1
     chainValue: the species of your pet
@@ -9213,7 +9298,13 @@ MonoBehaviour:
     - dog
     - cat
     - lizard
-    - fish
+    - goldfish
+    - snake
+    - pig
+    - chicken
+    - goat
+    - turtle
+    - shark
   - key: Pronoun1
     isUsedInPassword: 0
     chainValue: 
@@ -9229,6 +9320,17 @@ MonoBehaviour:
     - Acult
     - Slashing
     - Scream
+    - Cut
+    - Stab
+    - Slash
+    - Thriller
+    - Killer
+    - Chaos
+    - Fear
+    - Blood
+    - Decay
+    - Chains
+    - Hunt
   - key: Scary movie_number
     isUsedInPassword: 1
     chainValue: the sequel number of Fred's favourite horror film
@@ -9236,6 +9338,17 @@ MonoBehaviour:
     - 2
     - 3
     - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
   - key: Klien Birth_year
     isUsedInPassword: 1
     chainValue: Kilien's birth year
@@ -9243,6 +9356,13 @@ MonoBehaviour:
     - 1998
     - 2000
     - 1970
+    - 1975
+    - 1982
+    - 1987
+    - 1965
+    - 2001
+    - 1991
+    - 1973
   - key: Favourite food
     isUsedInPassword: 1
     chainValue: your favorite food
@@ -9252,6 +9372,11 @@ MonoBehaviour:
     - toast
     - cabbages
     - pinapple
+    - apples
+    - burgers
+    - sushi
+    - cheese
+    - lamb
   - key: Staff total
     isUsedInPassword: 1
     chainValue: the total number of all members of the facility
@@ -9264,6 +9389,8 @@ MonoBehaviour:
     - 222
     - 368
     - 845
+    - 12
+    - 59
   asteroid: {fileID: 1198172575}
   originalAsteroidPosition: {x: 0, y: 0, z: 0}
   asteroidTarget: {fileID: 1658471491}
