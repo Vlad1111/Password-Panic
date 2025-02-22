@@ -9247,11 +9247,11 @@ MonoBehaviour:
     isUsedInPassword: 1
     chainValue: your favorite food
     possibleValues:
-    - sea food
+    - fish
     - pizza
-    - beans on toast
-    - cabbage rolls
-    - pinapple pizza
+    - toast
+    - cabbages
+    - pinapple
   - key: Staff total
     isUsedInPassword: 1
     chainValue: the total number of all members of the facility
@@ -9848,6 +9848,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5699527721925518170, guid: bf5513f99cd73984f80bbf625ad4db40,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b709d9e3f37fc1e49a780092dd4a8f20,
+        type: 3}
     - target: {fileID: 8734433629809438976, guid: bf5513f99cd73984f80bbf625ad4db40,
         type: 3}
       propertyPath: LaserAnimator
