@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ComputerBehaviour : MonoBehaviour
 {
     public Animator LaserAnimator;
     public EmailBehaviour emailBehaviour;
+    public VirtualKeyboard virtualKeyboard;
 
     public float scale = 0;
     private float speed;
@@ -28,19 +28,34 @@ public class ComputerBehaviour : MonoBehaviour
         "piss",
         "fucker",
         "shitting",
-        "ass",
+        //"ass",
         "arse",
         "wanker",
         "nob"
     };
 
+    protected void AddEventTrigger(EventTrigger eventTrigger, EventTriggerType type, UnityEngine.Events.UnityAction<BaseEventData> call)
+    {
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = type;
+        entry.callback.AddListener(call);
+        eventTrigger.triggers.Add(entry);
+    }
+
     private void Start()
     {
         var all = GetComponentsInChildren<TMP_InputField>(true);
+        virtualKeyboard.Start();
         foreach (var a in all)
         {
             var input = a;
             a.onValueChanged.AddListener((x) => { CheckForProfanaty(input); });
+            var evLs = input.gameObject.AddComponent<EventTrigger>();
+            AddEventTrigger(evLs, EventTriggerType.PointerClick, (x) =>
+            {
+                if (SettingsWindow.Instance.setting.showKeyboard)
+                    VirtualKeyboard.Instance.OpenForInputField(input);
+            });
         }
     }
 

@@ -23,9 +23,9 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 1.19
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0.43271625, g: 0.4918086, b: 0.6415094, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -408,13 +408,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe5bd25f25bdc44f9f25c5ea1f33b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  remaingTime: 1200
+  remaingTime: 1800
   musicTime:
   - afterTime: 0
     music: {fileID: 8300000, guid: 6dffdad83b6bff346b66daf0edfcd6aa, type: 3}
-  - afterTime: 600
+  - afterTime: 900
     music: {fileID: 8300000, guid: d975a0673fc285e44a64e18ec9637ff8, type: 3}
-  - afterTime: 1020
+  - afterTime: 1530
     music: {fileID: 8300000, guid: 4600edc64e20f0f49a99ebe9a1a8d216, type: 3}
   countdownDisplyText: {fileID: 1171727868}
   laserPassword: 
@@ -4490,7 +4490,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.0000076294, y: -21.3}
+  m_AnchoredPosition: {x: 0.0000076294, y: -21.299805}
   m_SizeDelta: {x: 211.9995, y: 32.3982}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1171727868
@@ -4974,7 +4974,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 1.9005737, y: 6.763794}
+  m_AnchoredPosition: {x: 1.9003906, y: 6.763672}
   m_SizeDelta: {x: 29.1435, y: 46.4725}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1291977208
@@ -6312,6 +6312,55 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1673075049}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1713372873
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1713372875}
+  - component: {fileID: 1713372874}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1713372874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713372873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
+--- !u!4 &1713372875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713372873}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.5907197, y: 6.364206, z: 3.9891744}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1717902648
 Animator:
   serializedVersion: 5
@@ -6717,7 +6766,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.9006348, y: 8.236206}
+  m_AnchoredPosition: {x: -1.9008789, y: 8.236206}
   m_SizeDelta: {x: -29.143494, y: -16.472473}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1853129240
@@ -10181,3 +10230,4 @@ SceneRoots:
   - {fileID: 1212588750}
   - {fileID: 2133943984}
   - {fileID: 892506611}
+  - {fileID: 1713372875}

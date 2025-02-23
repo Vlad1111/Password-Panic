@@ -9,20 +9,28 @@ public class Setting
     public float masterVolume = 0.5f;
     public float musicVolue = 0.5f;
     public float sfxVolume = 0.5f;
+    public bool showKeyboard = false;
 }
 public class SettingsWindow : MonoBehaviour
 {
     private const string SettinKey = "__SAVED_SETTING__";
+    public static SettingsWindow Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public Transform settingParent;
     public Slider masterVolue;
     public Slider musicVolue;
     public Slider sfxVolue;
+    public Toggle showKeyboard;
     public Setting setting;
 
     public void Start()
     {
-        if(PlayerPrefs.HasKey(SettinKey))
+        Awake();
+        if (PlayerPrefs.HasKey(SettinKey))
         {
             setting = JsonUtility.FromJson<Setting>(PlayerPrefs.GetString(SettinKey));
         }
@@ -36,6 +44,8 @@ public class SettingsWindow : MonoBehaviour
         SoundManager.Instance.MusicVolume = setting.musicVolue;
         SoundManager.Instance.SFXVolume = setting.sfxVolume;
         SoundManager.Instance.RecalculateVolume();
+
+        showKeyboard.SetIsOnWithoutNotify(setting.showKeyboard);
     }
 
     public void Open()
@@ -75,5 +85,11 @@ public class SettingsWindow : MonoBehaviour
 
         SoundManager.Instance.SFXVolume = setting.sfxVolume;
         SoundManager.Instance.RecalculateVolume();
+    }
+
+    public void ShowKeyboardChange()
+    {
+        setting.showKeyboard = showKeyboard.isOn;
+        PlayerPrefs.SetString(SettinKey, JsonUtility.ToJson(setting));
     }
 }
